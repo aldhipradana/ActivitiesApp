@@ -3,13 +3,15 @@ package com.example.activitiesapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
 
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +19,8 @@ public class MenuActivity extends AppCompatActivity {
 
         Button btnProfile, btnActivities, btnExit;
 
+        sharedPreferences = getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         btnProfile = findViewById(R.id.btnProfile);
         btnActivities = findViewById(R.id.btnActivities);
@@ -49,6 +53,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void closeApplication(View view) {
+        editor.clear();
+        editor.commit();
         finish();
         moveTaskToBack(true);
     }

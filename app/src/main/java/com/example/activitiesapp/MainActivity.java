@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText usname;
     private TextInputEditText uspwd;
     Button login;
+    ImageButton close;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor session;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         login = findViewById(R.id.btnLogin);
+        close = findViewById(R.id.closeBtn);
         usname =  findViewById(R.id.txtUsername);
         uspwd = findViewById(R.id.txtPassword);
 
@@ -44,11 +47,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (loginChecker()){
                     Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                    Toast.makeText( getApplicationContext(),"Halo "+sharedPreferences.getString("usname", ""), Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }else{
                     Snackbar failedLogin = Snackbar.make(v, "Enter Correct Username and Password!", Snackbar.LENGTH_SHORT);
                     failedLogin.show();
                 }
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeApplication(v);
             }
         });
     }
@@ -74,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         boolean mysession = sharedPreferences.getBoolean("session", false);
 
         if (mysession){
-            Toast.makeText( getApplicationContext(),"Sudah Login", Toast.LENGTH_SHORT).show();
+            Toast.makeText( getApplicationContext(),"Halo "+sharedPreferences.getString("usname", ""), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
             startActivity(intent);
         }else {
@@ -83,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void closeApplication(View view) {
+        finish();
+        moveTaskToBack(true);
+    }
 
 
 }

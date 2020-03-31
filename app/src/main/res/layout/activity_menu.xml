@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:text="Exit"
+            android:text="Logout &amp; Exit"
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:fontFamily="cursive"
