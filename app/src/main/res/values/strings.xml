@@ -2,4 +2,6 @@
     <string name="app_name">ActivitiesApp</string>
     <string name="username">Username</string>
     <string name="pass">Password</string>
+
+    <string name="lorip" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sollicitudin eros. Etiam quis erat tempor, efficitur nunc sit amet, consectetur diam. </string>
 </resources>

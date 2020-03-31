@@ -3,10 +3,12 @@ package com.example.activitiesapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText uspwd;
     Button login;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         usname =  findViewById(R.id.txtUsername);
         uspwd = findViewById(R.id.txtPassword);
 
+        sharedPreferences = getSharedPreferences("MyPref", MODE_PRIVATE);
+        session = sharedPreferences.edit();
+
+        sesssionChecker();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,11 +59,30 @@ public class MainActivity extends AppCompatActivity {
         final String password = uspwd.getText().toString();
 
         if ( ( username != null && username.length() >= 1 ) && ( password != null && password.length() >= 3 ) ){
+            session.putString("usname", username);
+            session.putBoolean("session", true);
+            session.commit();
             return true;
         }else{
             return false;
         }
 
     }
+
+    public void sesssionChecker(){
+
+        boolean mysession = sharedPreferences.getBoolean("session", false);
+
+        if (mysession){
+            Toast.makeText( getApplicationContext(),"Sudah Login", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+            startActivity(intent);
+        }else {
+            Toast.makeText( getApplicationContext(),"Silahkan Login", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
 
 }

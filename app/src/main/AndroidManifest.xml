@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivitiesListActivity"></activity>
-        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".ActivitiesListActivity"
+            android:label="My Activities"
+            ></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="My Profile"
+            />
         <activity
             android:name=".MenuActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
